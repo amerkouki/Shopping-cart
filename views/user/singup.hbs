@@ -1,0 +1,32 @@
+<div class="col-md-4 offset-md-4" style="padding-top: 80px;">
+    <h5 class="text-center">Singup</h5>
+
+
+    {{#each messages}}
+
+    <div class="alert alert-danger">
+        <p> 
+            {{this}}
+        </p>
+    </div>
+    {{/each}}
+
+    <form action="/users/singup" method="post">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="" placeholder="Enter your email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" name="password" id="" placeholder="Enter your password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="confirma-password">confirm-password"</label>
+            <input type="password" name="confirm-password"" id="" placeholder=" Enter your onfirma-password""
+                class="form-control">
+        </div>
+        <input type="hidden"  name="_csrf" value="{{token}}">
+        <button type="submit" class="btn btn-primary">singup</button>
+
+    </form>
+</div>

@@ -1,0 +1,68 @@
+{{#if successMessageCharge}}
+<div class="alert alert-success text-center">
+    {{successMessageCharge}}
+</div>
+{{/if}}
+{{#each produits}}
+<div class="row">
+    {{#each this}}
+    <div class=" col col-sm-4 ">
+        <div class="card">
+            <div class="text-center">
+                <img src="{{this.imagePath}}" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{this.produitName}}</h5>
+                <p class="card-text">
+                    {{this.information.storegeCapacity}} GB <br>
+                    {{this.information.numberOfSIM}} <br>
+                    {{this.information.cameraResolution}} MP <br>
+                    {{this.information.displySize}} Inch
+                </p>
+                <div class="clearfix">
+                    <div class="prix float-left">$ {{this.prix}}</div>
+                    {{#if ../../checkuser}}
+                    <a href="/addToCart/{{this._id}}/{{this.prix}}/{{this.produitName}}"
+                        class="btn btn-success float-right">Buy</a>
+                    {{else}}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal">
+                       Buy
+                    </button>
+
+                    {{/if}}
+                    <!-- Vertically centered modal -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{/each}}
+</div>
+{{/each}}
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-primary" href="/users/signin">Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.container{
+  padding-top: 20px;
+}
+.col{
+  padding-top: 30px;
+
+}
+.card img{
+  max-width: 100px;
+  max-height: 200px;
+  min-width: 100px;
+  min-height: 200px;
+}
+.card .card-title{
+font-size: 20px;
+}
+.card .card-text{
+  font-size: 15px;
+  }
+
+.prix{
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+}
+.mouve-top{
+  padding-top: 30px;
+}
+

@@ -1,0 +1,329 @@
+<input type="hidden" value="{{hasMessageError}}" id="hasMessageError">
+<input type="hidden" value="{{hasMessageEmailError}}" id="hasMessageEmailError">
+<input type="hidden" value="{{hasMessagePasswordError}}" id="hasMessagePasswordError">
+
+<div class="row">
+    <h1>user Profile</h1>
+</div>
+
+<div class="row">
+    <div class="col-sm-3">
+        {{#if messageImage}}
+        <div class="alert alert-danger">
+            <p>{{messageImage}}</p>
+        </div>
+        {{/if}}
+
+
+        <div class="text-center">
+            <img src="{{user._doc.image}}" id="img" class="img-thumbnail" alt="...">
+
+        </div>
+        <br>
+        <form action="uploadFile" method="POST" enctype="multipart/form-data">
+            <input class="form-control" type="file" name="file" id="file" accept="image/*">
+            <input type="hidden" name="_csrf" value="{{token}}">
+            <div class="d-none" id="actionButton">
+                <button type="submit" class="btn btn-success">save</button>
+                <a href="/users/profile" class="btn btn-danger">cancel</a>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-sm-9">
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-SingIn"
+                    type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Setting SingIn</button>
+
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                    type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Order</button>
+                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                    type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+            </div>
+        </nav>
+
+
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <div class="container">
+                    <div class="row" id="rowHome">
+                        <div class="col-3 col-sm-3">
+                            <p class="fw-bold">user Name</p>
+                        </div>
+                        <div class="col-9  col-sm-9">
+                            <p class="fw-normal">{{user._doc.userName}}</p>
+                        </div>
+
+                        <div class="col-3 col-sm-3">
+                            <p class="fw-bold">email</p>
+                        </div>
+                        <div class="col-9 col-sm-9">
+                            <p class="fw-normal">{{user._doc.email}}</p>
+                        </div>
+
+                        <div class="col-3 col-sm-3">
+                            <p class="fw-bold">Contact</p>
+                        </div>
+                        <div class="col-9 col-sm-9">
+                            <p class="fw-normal">{{user._doc.contact}}</p>
+                        </div>
+
+                        <div class="col-3 col-sm-3">
+                            <p class="fw-bold">address</p>
+                        </div>
+                        <div class="col-9 col-sm-9">
+                            <p class="fw-normal">{{user._doc.adress}}</p>
+                        </div>
+
+                        <div class="col-3 col-sm-3">
+                            <p class="fw-bold">Password</p>
+                        </div>
+                        <div class="col-9 col-sm-9">
+                            <p class="fw-normal"></p>
+                        </div>
+
+                        <div class="text-center col-12">
+                            <button type="button" class="btn btn-primary" id="updateData"
+                                style="margin-top: 30px;">Update Data</button>
+                        </div>
+                    </div>
+
+
+
+
+                    <form id="formData" class="d-none col-8 col-sm-8" method="POST" action="updateUser">
+                        {{#each messageError }}
+                        <div class="alert alert-danger">
+                            <p>{{this}}</p>
+                        </div>
+
+                        {{/each}}
+
+                        <div class="form-group">
+                            <label for=" userName" class="form-label">User Name</label>
+                            <input type="text" class="form-control" placeholder="please enter yur User Name"
+                                name="userName" value="{{user._doc.userName}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for=" contact" class="form-label">Contact</label>
+                            <input type="text" class="form-control" name="contact"
+                                placeholder="please enter your Contact" value="{{user._doc.contact}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for=" adress" class="form-label">Address</label>
+                            <input type="text" class="form-control" name="adress" placeholder="please enter your Adress"
+                                value="{{user._doc.adress}}">
+                        </div>
+
+
+                        <input type="hidden" name="_csrf" value="{{token}}">
+                        <div class="text-center">
+                            <button class="btn btn-success" type="submit">Save </button>
+                            <button type="reset" id="btnCancel" class="btn btn-danger">cancel</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-SingIn" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <h1>Sing In</h1>
+
+
+                <div class="container">
+                    <div class="row" id="rowSingIn">
+                        <div class="col-3 col-sm-3 mouve-top">
+                            <p class="fw-bold">email</p>
+                        </div>
+                        <div class="col-3  col-sm-3 mouve-top">
+                            <p class="fw-normal">{{user._doc.email}}</p>
+                        </div>
+                        <div class="col-3  col-sm-3 mouve-top">
+                            <button type="button" class="btn btn-primary" id="btnUpdatEmail">udate Email</button>
+                        </div>
+                        <div class="col-3  col-sm-3 mouve-top"> </div>
+
+                        <div class="col-3 col-sm-3 mouve-top">
+                            <p class="fw-bold">Password</p>
+                        </div>
+                        <div class="col-3  col-sm-3 mouve-top">
+                            <p class="fw-normal"></p>
+                        </div>
+                        <div class="col-3  col-sm-3 mouve-top">
+                            <button type="button" class="btn btn-primary" id="btnUpdatePassword">udate password</button>
+                        </div>
+                        <div class="col-3  col-sm-3 mouve-top"> </div>
+                    </div>
+
+                    <form id="formdataEmail" class="d-none col-8 col-sm-8" method="POST" action="updateEmail">
+                        {{#each messageEmailError }}
+                        <div class="alert alert-danger">
+                            <p>{{this}}</p>
+                        </div>
+                        {{/each}}
+
+                        <div class="form-group">
+                            <label for=" userName" class="form-label">new Email</label>
+                            <input type="text" class="form-control" placeholder="please enter you new email"
+                                name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for=" email" class="form-label">password</label>
+                            <input type="password" class="form-control" name="password"
+                                placeholder="please enter password">
+                        </div>
+                        <input type="hidden" name="_csrf" value="{{token}}">
+                        <div class="text-center">
+                            <button class="btn btn-success" type="submit">Save </button>
+                            <button type="reset" onclick="btnCancelUpdate()" class="btn btn-danger">cancel</button>
+                        </div>
+                    </form>
+
+                    <form id="formdataPassword" class="d-none col-8 col-sm-8" method="POST" action="updatePassword">
+                        {{#each messagePasswordError }}
+                        <div class="alert alert-danger">
+                            <p>{{this}}</p>
+                        </div>
+
+                        {{/each}}
+
+                        <div class="form-group">
+                            <label for=" userName" class="form-label">ancienne Password</label>
+                            <input type="text" class="form-control" placeholder="please enter you new email"
+                                name="ancienPassword">
+                        </div>
+
+                        <div class="form-group">
+                            <label for=" email" class="form-label">New password</label>
+                            <input type="text" class="form-control" name="newPassword"
+                                placeholder="please enter password">
+                        </div>
+                        <div class="form-group">
+                            <label for=" email" class="form-label">confirm password</label>
+                            <input type="password" class="form-control" name="confirmPassword"
+                                placeholder="please enter password">
+                        </div>
+                        <input type="hidden" name="_csrf" value="{{token}}">
+                        <div class="text-center">
+                            <button class="btn btn-success" type="submit">Save </button>
+                            <button type="reset" onclick="btnCancelUpdate()" class="btn btn-danger">cancel</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="nav-profile" style=" height:550px;overflow:scroll;overflow-x:hidden;"
+                role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div style="padding-top: 30px;">
+
+                    {{#each userOrder as |val index|}}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class=" table-active text-center">
+                                <td colspan="4" style="font-weight: bold;"> Order Number {{add @index}}</td>
+                            </tr>
+                            <tr class="text-center ">
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product Quantity</th>
+                                <th scope="col">Product Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each this._doc.cart.selectedProduit}}
+                            <tr class="text-center">
+                                <th scope="row">{{add @index}}</th>
+                                <td>{{this.name}}</td>
+                                <td>{{this.quantity}}</td>
+                                <td>{{this.prix}}</td>
+                            </tr>
+                            {{/each}}
+                            <tr class=" table-primary">
+                                <td colspan="3" style="font-weight: bold;"> Total Price</td>
+                                <td class="text-center table-primary">$ {{this._doc.cart.totalPrix}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    {{/each }}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    if (document.getElementById('hasMessageError').value === "true") {
+        document.getElementById('rowHome').classList.add("d-none");
+        document.getElementById('formData').classList.remove("d-none");
+    }
+
+    if (document.getElementById('hasMessageEmailError').value === 'true') {
+        document.getElementById('formdataPassword').classList.add("d-none");
+        document.getElementById('rowSingIn').classList.add("d-none");
+        document.getElementById('formdataEmail').classList.remove("d-none");
+    }
+
+    if (document.getElementById('hasMessagePasswordError').value === 'true') {
+        document.getElementById('formdataEmail').classList.add("d-none");
+        document.getElementById('rowSingIn').classList.add("d-none");
+        document.getElementById('formdataPassword').classList.remove("d-none");
+    }
+
+    document.getElementById('file').onchange = function () {
+        const reader = new FileReader();
+        reader.readAsDataURL(this.files[0]);
+        reader.onload = function () {
+            document.getElementById('img').src = this.result;
+        }
+        document.getElementById('file').classList.add("d-none");
+        document.getElementById('actionButton').classList.remove("d-none");
+    }
+
+
+    document.getElementById('updateData').onclick = function () {
+        document.getElementById('rowHome').classList.add("d-none");
+        document.getElementById('formData').classList.remove("d-none");
+    }
+    document.getElementById('btnCancel').onclick = function () {
+        document.getElementById('formData').classList.add("d-none");
+        document.getElementById('rowHome').classList.remove("d-none");
+    }
+    document.getElementById('btnUpdatEmail').onclick = function () {
+        document.getElementById('formdataPassword').classList.add("d-none");
+        document.getElementById('rowSingIn').classList.add("d-none");
+        document.getElementById('formdataEmail').classList.remove("d-none");
+    }
+    document.getElementById('btnUpdatePassword').onclick = function () {
+        document.getElementById('formdataEmail').classList.add("d-none");
+        document.getElementById('rowSingIn').classList.add("d-none");
+        document.getElementById('formdataPassword').classList.remove("d-none");
+    }
+    function btnCancelUpdate() {
+        document.getElementById('formdataPassword').classList.add("d-none");
+        document.getElementById('formdataEmail').classList.add("d-none");
+        document.getElementById('rowSingIn').classList.remove("d-none");
+    }
+
+
+</script>

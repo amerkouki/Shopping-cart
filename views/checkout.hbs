@@ -1,0 +1,80 @@
+<div style="padding-top: 30px; padding-bottom: 30px;" class="col-md-6 offset-md-3">
+
+    {{#if errorMessageCharge}}
+    <div class=" allert-danger">
+        {{errorMessageCharge}}
+    </div>
+    {{/if}}
+
+    <div class="alert alert-danger d-none" id="payment-errors">
+
+    </div>
+
+
+    <form method="POST" action="/checkout" id="payment-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="" placeholder="enter your Name" value="{{user._doc.userName}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="addresse">addresse</label>
+            <input type="text" name="address" id="" value="{{user._doc.adress}}" placeholder="enter your addresse" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="addresse">Conatct</label>
+            <input type="text" name="contact" id="" value="{{user._doc.contact}}" placeholder="enter your addresse" class="form-control">
+        </div>
+
+
+        <div class="form-group">
+            <label for="cridet-cart-name">Cridet Cart Name</label>
+            <input type="text" name="cridet-cart-name" id="" placeholder="enter your Cridet Cart Name"
+                class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="cridet-cart-number">Cridet Cart number</label>
+            <input type="text" name="cridet-cart-number" id="card-number" placeholder="enter your Cridet Cart Name"
+                class="form-control">
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="expiration-month">Expiration Month</label>
+                    <input type="number" name="expiration-month" id="card-expiry-month"
+                        placeholder="enter your Cridet Cart expiration month" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="expiration-year"> Expiration year</label>
+                    <input type="number" name="expiration-year" id="card-expiry-year"
+                        placeholder="enter your Cridet Cart expiration year" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="CVC">CVC</label>
+            <input type="number" name="CVC" id="card-cvc" placeholder="enter your Cridet Cart CVC" class="form-control">
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" id="btn"> checkout ${{totalPrice}} </button>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+
+<script src="https://js.stripe.com/v2/"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="/javascripts/checkout.js">
+
+</script>
